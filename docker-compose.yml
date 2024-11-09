@@ -62,8 +62,4 @@ services:
     environment:
         PMA_HOST: mysql
         MYSQL_USERNAME: root
-<<<<<<< HEAD
         MYSQL_ROOT_PASSWORD: "password"
-=======
-        MYSQL_ROOT_PASSWORD: "password"
->>>>>>> aeaa449f63a9cc18468db6c517137e0373565b97
