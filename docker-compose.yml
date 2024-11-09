@@ -1,0 +1,65 @@
+version: '3'
+services:
+  tg_game:
+    container_name: tg_game
+    build: .
+    restart: always
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./app:/app
+    depends_on:
+      - mysql
+    environment:
+      - TOKEN=
+      - PASSWD=password
+      - USER=root
+  mysql:
+    container_name: mysql
+    restart: always
+    build: ./mysql
+    volumes:
+      - ./mysql/db:/var/lib/mysql
+    ports:
+      - "3306:3306"
+  php:
+    container_name: php
+    restart: always
+    build: ./php
+    volumes:
+      - ./nginx/html:/var/www/html
+      - ./php/conf.d:/usr/local/etc/php/conf.d
+    depends_on:
+      - mysql
+    environment:
+      - MYSQL_HOST=mysql
+    links:
+      - mysql
+    expose:
+      - "9000"
+  nginx:
+    container_name: nginx
+    build: ./nginx
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/html:/var/www/html
+      - ./nginx/logs:/var/log/nginx
+      - ./nginx/letsencrypt:/etc/letsencrypt/
+    depends_on:
+      - php
+  pma:
+    container_name: pma
+    image: mirror.gcr.io/library/phpmyadmin
+    restart: always
+    links:
+      - "mysql:mysql" 
+    ports:
+      - 8183:80
+    environment:
+        PMA_HOST: mysql
+        MYSQL_USERNAME: root
+        MYSQL_ROOT_PASSWORD: "123"

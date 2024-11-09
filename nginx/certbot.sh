@@ -1,0 +1,1 @@
+yes | certbot --nginx -d domain --register-unsafely-without-email
