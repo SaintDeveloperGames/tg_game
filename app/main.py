@@ -13,7 +13,7 @@ async def mysqlConnect(id, first_name, max_score):
     try:
         db = mysql.connector.connect( #Меняем на своё
             host='192.168.0.103',
-            user=mysql_user,
+            user=root,
             passwd=password,
             database='db_tg'
         )
