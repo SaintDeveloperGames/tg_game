@@ -27,11 +27,7 @@ sudo docker --version
 
 # Установка Docker Compose
 echo "Установка Docker Compose..."
-DOCKER_COMPOSE_VERSION=$(curl -s https://api.github.com/repos/docker/compose/releases/latest | grep -Po '"tag_name": "\K[0-9.]+')
-sudo curl -L "https://github.com/docker/compose/releases/download/$DOCKER_COMPOSE_VERSION/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-
-# Присвоение прав на выполнение Docker Compose
-sudo chmod +x /usr/local/bin/docker-compose
+sudo apt install -y docker-compose
 
 # Проверка установки Docker Compose
 echo "Проверка установки Docker Compose..."

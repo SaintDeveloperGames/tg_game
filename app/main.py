@@ -12,8 +12,8 @@ mysql_user = os.environ.get("USER")
 async def mysqlConnect(id, first_name, max_score):
     try:
         db = mysql.connector.connect( #Меняем на своё
-            host='192.168.0.103',
-            user=root,
+            host='host',
+            user=mysql_user,
             passwd=password,
             database='db_tg'
         )
